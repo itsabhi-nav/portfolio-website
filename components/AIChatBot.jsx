@@ -7,7 +7,7 @@ export default function AIChatBot() {
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hi! I’m AshutoshBot 🤖 — Ask me anything about my portfolio!' }
+    { sender: 'bot', text: 'Hi! I’m Abhinav Bot 🤖 — Ask me anything about my portfolio!' }
   ])
 
   const scrollRef = useRef(null)
@@ -19,18 +19,17 @@ export default function AIChatBot() {
     const newUserMessage = { sender: 'user', text: input.trim() }
     setMessages((prev) => [...prev, newUserMessage])
 
-    // Fake response delay (replace with fetch call later)
+    // Fake async bot response
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { sender: 'bot', text: `🤔 Let me think about "${input.trim()}"...` }
+        { sender: 'bot', text: `🤔 Hmm... thinking about "${input.trim()}"...` }
       ])
     }, 800)
 
     setInput('')
   }
 
-  // Auto scroll to bottom when new messages arrive
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
@@ -39,43 +38,42 @@ export default function AIChatBot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Floating Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 z-50 bg-primary text-background p-3 rounded-full shadow-lg hover:scale-105 transition"
+        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-indigo-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-105 transition-all"
         aria-label="Toggle Chat"
       >
         {open ? <X size={20} /> : <MessageSquare size={20} />}
       </button>
 
-      {/* Chat UI */}
+      {/* Chat Container */}
       {open && (
-        <div className="fixed bottom-20 right-6 z-40 w-80 bg-background border border-muted rounded-xl shadow-xl flex flex-col overflow-hidden">
+        <div className="fixed bottom-20 right-6 z-40 w-[22rem] max-h-[34rem] flex flex-col bg-background/90 backdrop-blur-md border border-muted rounded-xl shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="p-4 text-sm font-semibold bg-muted text-foreground flex items-center gap-2">
-            <Bot size={16} /> AshutoshBot
+          <div className="p-4 text-sm font-semibold bg-muted/60 flex items-center gap-2 border-b border-border">
+            <Bot size={16} /> ABHINAV BOT
           </div>
 
-          {/* Messages */}
+          {/* Chat Body */}
           <div
             ref={scrollRef}
-            className="p-3 flex-1 overflow-y-auto max-h-80 space-y-3 text-sm text-foreground scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent"
+            className="flex-1 overflow-y-auto p-4 space-y-3 text-sm text-foreground scrollbar-thin"
           >
             {messages.map((msg, i) => (
               <div
                 key={i}
-                className={`flex items-start gap-2 ${
+                className={`flex gap-2 ${
                   msg.sender === 'user' ? 'justify-end' : 'justify-start'
                 }`}
               >
                 {msg.sender === 'bot' && (
-                  <div className="bg-muted p-2 rounded-full">
-                    <Bot size={14} className="text-muted-foreground" />
+                  <div className="shrink-0 bg-muted p-1.5 rounded-full">
+                    <Bot className="h-4 w-4 text-muted-foreground" />
                   </div>
                 )}
-
                 <div
-                  className={`px-3 py-2 rounded-lg max-w-[80%] ${
+                  className={`px-3 py-2 rounded-lg max-w-[80%] leading-relaxed ${
                     msg.sender === 'bot'
                       ? 'bg-muted text-left'
                       : 'bg-primary text-background text-right'
@@ -83,31 +81,27 @@ export default function AIChatBot() {
                 >
                   {msg.text}
                 </div>
-
                 {msg.sender === 'user' && (
-                  <div className="bg-primary p-2 rounded-full">
-                    <User size={14} className="text-background" />
+                  <div className="shrink-0 bg-primary p-1.5 rounded-full">
+                    <User className="h-4 w-4 text-background" />
                   </div>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Input */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex border-t border-muted bg-background"
-          >
+          {/* Input Field */}
+          <form onSubmit={handleSubmit} className="flex items-center border-t border-border">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-3 py-2 text-sm bg-transparent outline-none"
-              placeholder="Ask something..."
+              className="flex-1 px-4 py-2 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
+              placeholder="Type your message..."
             />
             <button
               type="submit"
-              className="px-4 text-primary hover:text-primary/80 transition"
-              aria-label="Send"
+              className="p-3 text-primary hover:text-primary/80 transition"
+              aria-label="Send Message"
             >
               <Send size={18} />
             </button>

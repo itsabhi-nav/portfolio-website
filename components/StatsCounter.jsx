@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 const statsData = [
   { label: 'Projects Built', value: 18 },
@@ -14,7 +15,7 @@ export default function StatsCounter() {
 
   useEffect(() => {
     const intervals = statsData.map((stat, i) => {
-      const step = Math.ceil(stat.value / 60)
+      const step = Math.ceil(stat.value / 50)
       return setInterval(() => {
         setCounts(prev => {
           const updated = [...prev]
@@ -23,23 +24,36 @@ export default function StatsCounter() {
           }
           return updated
         })
-      }, 30)
+      }, 25)
     })
 
     return () => intervals.forEach(clearInterval)
   }, [])
 
   return (
-    <section className="bg-muted/5 px-6 py-20 text-center">
-      <h2 className="text-3xl font-bold mb-10">📊 My Developer Stats</h2>
+    <section className="bg-muted/5 px-6 py-28 text-center">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-4xl font-bold mb-14 tracking-tight text-foreground">
+          📊 My Developer Stats
+        </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-4xl mx-auto">
-        {statsData.map((stat, i) => (
-          <div key={stat.label} className="bg-background p-6 rounded-lg shadow text-foreground">
-            <p className="text-3xl font-bold">{counts[i].toLocaleString()}</p>
-            <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-          </div>
-        ))}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          {statsData.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="bg-background border border-border rounded-xl p-6 shadow-sm"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+            >
+              <p className="text-3xl font-bold text-foreground">
+                {counts[i].toLocaleString()}
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

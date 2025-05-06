@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import ScrollProgress from '../components/ScrollProgress';
 
 import AIChatBot from '../components/AIChatBot';
-import FloatingIcons from '../components/FloatingIcons';
+// import FloatingIcons from '../components/FloatingIcons';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
 
-          <FloatingIcons />
+          {/* <FloatingIcons /> */}
           <AIChatBot />
         </ThemeProvider>
       </body>

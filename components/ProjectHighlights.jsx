@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import ProjectCard from './ProjectCard'
+import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
 
 const highlightedProjects = [
   {
@@ -30,24 +32,48 @@ const highlightedProjects = [
   }
 ]
 
+// animation variants
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' }
+  })
+}
+
 export default function ProjectHighlights() {
   return (
-    <section className="py-20 px-6 bg-muted/5">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">🚧 Featured Projects</h2>
+    <section className="relative py-28 px-6 bg-muted/5">
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-16 text-foreground tracking-tight">
+          🧪 Curated with Code & Imagination
+        </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {highlightedProjects.map((project, i) => (
-            <ProjectCard key={i} {...project} />
+            <motion.div
+              key={i}
+              custom={i}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={cardVariants}
+            >
+              <ProjectCard {...project} />
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <Link
-            href="/projects"
-            className="inline-block px-6 py-3 border border-foreground rounded-lg hover:bg-foreground hover:text-background transition"
-          >
-            View All Projects →
+        <div className="text-center mt-16">
+          <Link href="/projects">
+            <Button
+              size="lg"
+              variant="default"
+              className="text-base px-6 py-2 hover:scale-105 transition-transform"
+            >
+              Explore All Creations →
+            </Button>
           </Link>
         </div>
       </div>
