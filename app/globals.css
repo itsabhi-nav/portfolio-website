@@ -54,7 +54,7 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  cursor: none;
+
 }
 
 /* ==== Scrollbar Styling ==== */
@@ -76,9 +76,6 @@ body {
 }
 
 /* ==== Custom Cursor Utility ==== */
-html, body {
-  cursor: none;
-}
 
 /* ==== Animation: Floating Icons ==== */
 @keyframes float-slow {
