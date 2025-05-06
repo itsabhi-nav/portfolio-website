@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const titles = [
@@ -14,7 +14,6 @@ export default function HeroSection() {
   const [index, setIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
-  const canvasRef = useRef(null)
 
   useEffect(() => {
     let timeout
@@ -42,32 +41,45 @@ export default function HeroSection() {
   useEffect(() => {
     const canvas = document.getElementById('matrix')
     const ctx = canvas.getContext('2d')
-    canvas.height = window.innerHeight
-    canvas.width = window.innerWidth
-
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?'
     const fontSize = 16
-    const columns = Math.floor(canvas.width / fontSize)
-    const drops = Array(columns).fill(1)
+    let drops = []
 
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      const columns = Math.floor(canvas.width / fontSize)
+      drops = Array(columns).fill(1)
+    }
+
+    const draw = () => {
+      const isDark = document.documentElement.classList.contains('dark')
+      ctx.fillStyle = isDark
+        ? 'rgba(0, 0, 0, 0.2)'
+        : 'rgba(255, 255, 255, 0.2)'
+
       ctx.fillRect(0, 0, canvas.width, canvas.height)
-      ctx.fillStyle = '#0F0'
+
+      ctx.fillStyle = isDark ? '#00b300' : '#00ff00'
       ctx.font = `${fontSize}px monospace`
+
       for (let i = 0; i < drops.length; i++) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?'
         const text = chars[Math.floor(Math.random() * chars.length)]
         ctx.fillText(text, i * fontSize, drops[i] * fontSize)
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0
-        }
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0
         drops[i]++
       }
     }
 
+    resizeCanvas()
     const interval = setInterval(draw, 33)
-    return () => clearInterval(interval)
+    window.addEventListener('resize', resizeCanvas)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('resize', resizeCanvas)
+    }
   }, [])
 
   const playTypingSound = () => {
@@ -77,30 +89,34 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative h-[100vh] flex items-center justify-center text-center px-6 overflow-hidden bg-black">
-      <canvas id="matrix" className="absolute inset-0 z-0 opacity-60" />
+<section className="relative h-[70vh] md:h-screen flex items-center justify-center px-6 bg-background text-foreground overflow-hidden transition-colors">
 
-      <div className="relative z-10 max-w-4xl mx-auto animate-fade-in-up">
-        <p className="text-sm uppercase tracking-widest text-green-400 mb-4 font-mono animate-pulse">
+      <canvas id="matrix" className="absolute inset-0 z-0 opacity-50 pointer-events-none" />
+
+      <div className="relative z-10 max-w-4xl text-center animate-fade-in-up">
+        <p className="text-sm uppercase tracking-widest text-muted-foreground mb-4 font-mono animate-pulse">
           Initializing neural handshake...
         </p>
-        <h1 className="text-6xl md:text-7xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-br from-green-400 to-blue-500">
+
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-foreground">
           Abhinav Dubey
         </h1>
-        <h2 className="text-2xl md:text-3xl font-mono text-green-300 mb-6">
-          {displayedText}<span className="inline-block w-2 h-5 bg-green-400 animate-cursor ml-1" />
+
+        <h2 className="text-2xl md:text-3xl font-mono text-muted-foreground mb-6">
+          {displayedText}
+          <span className="inline-block w-2 h-5 bg-primary animate-cursor ml-1" />
         </h2>
 
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 flex-wrap">
           <Link
             href="/projects"
-            className="px-6 py-2 rounded border border-green-400 text-green-400 font-semibold hover:bg-green-400 hover:text-black transition-all"
+            className="px-6 py-2 rounded border border-primary text-primary font-semibold hover:bg-primary hover:text-background transition-all"
           >
             View Projects
           </Link>
           <Link
             href="/contact"
-            className="px-6 py-2 rounded border border-blue-400 text-blue-400 font-semibold hover:bg-blue-400 hover:text-black transition-all"
+            className="px-6 py-2 rounded border border-primary text-primary font-semibold hover:bg-primary hover:text-background transition-all"
           >
             Let’s Connect
           </Link>

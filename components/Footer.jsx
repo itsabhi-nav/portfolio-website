@@ -15,19 +15,20 @@ export default function Footer() {
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-foreground">Abhinav.dev</h2>
           <p className="text-muted-foreground text-sm">
-            Building next-gen interfaces with embedded systems, full-stack apps & AI.
+            Full Stack Developer | React Native & Next.js enthusiast | Currently building smart,
+            scalable, AI-powered apps at ArgenBright Innovation Labs.
           </p>
           <div className="flex space-x-3 mt-4">
-            <Link href="https://github.com" target="_blank" className="hover:text-foreground">
+            <Link href="https://github.com/itsabhi-nav" target="_blank" className="hover:text-foreground">
               <Github className="h-5 w-5" />
             </Link>
-            <Link href="https://linkedin.com" target="_blank" className="hover:text-foreground">
+            <Link href="https://www.linkedin.com/in/abhinav-dubey-1694b4204/" target="_blank" className="hover:text-foreground">
               <Linkedin className="h-5 w-5" />
             </Link>
-            <Link href="mailto:you@email.com" className="hover:text-foreground">
+            <Link href="mailto:dubeyabhinav100@gmail.com" className="hover:text-foreground">
               <Mail className="h-5 w-5" />
             </Link>
-            <Link href="https://twitter.com" target="_blank" className="hover:text-foreground">
+            <Link href="https://twitter.com/its_abhi_nav" target="_blank" className="hover:text-foreground">
               <Twitter className="h-5 w-5" />
             </Link>
           </div>
@@ -37,26 +38,10 @@ export default function Footer() {
         <div>
           <h4 className="text-foreground font-semibold mb-3">Explore</h4>
           <ul className="space-y-2">
-            <li>
-              <Link href="/" className="hover:text-foreground">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/projects" className="hover:text-foreground">
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="hover:text-foreground">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-foreground">
-                Contact
-              </Link>
-            </li>
+            <li><Link href="/" className="hover:text-foreground">Home</Link></li>
+            <li><Link href="/projects" className="hover:text-foreground">Projects</Link></li>
+            <li><Link href="/blog" className="hover:text-foreground">Blog</Link></li>
+            <li><Link href="/contact" className="hover:text-foreground">Contact</Link></li>
           </ul>
         </div>
 
@@ -64,26 +49,10 @@ export default function Footer() {
         <div>
           <h4 className="text-foreground font-semibold mb-3">Resources</h4>
           <ul className="space-y-2">
-            <li>
-              <Link href="/resume" className="hover:text-foreground">
-                Resume
-              </Link>
-            </li>
-            <li>
-              <Link href="https://nextjs.org" target="_blank" className="hover:text-foreground">
-                Next.js
-              </Link>
-            </li>
-            <li>
-              <Link href="https://ui.shadcn.com" target="_blank" className="hover:text-foreground">
-                shadcn/ui
-              </Link>
-            </li>
-            <li>
-              <Link href="https://openai.com" target="_blank" className="hover:text-foreground">
-                LLMs / GPT
-              </Link>
-            </li>
+            <li><Link href="/resume" className="hover:text-foreground">Resume</Link></li>
+            <li><Link href="https://nextjs.org" target="_blank" className="hover:text-foreground">Next.js</Link></li>
+            <li><Link href="https://ui.shadcn.com" target="_blank" className="hover:text-foreground">shadcn/ui</Link></li>
+            <li><Link href="https://openai.com" target="_blank" className="hover:text-foreground">LLMs / GPT</Link></li>
           </ul>
         </div>
 
@@ -106,7 +75,7 @@ export default function Footer() {
         <Link href="https://nextjs.org" className="underline hover:text-blue-500" target="_blank">
           Next.js
         </Link>
-        , TailwindCSS, shadcn/ui & Express JS.
+        , TailwindCSS, shadcn/ui & Express.js.
       </div>
     </footer>
   )
