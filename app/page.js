@@ -1,7 +1,7 @@
 
 
 import HeroSection from '../components/HeroSection'
-import FloatingIcons from '../components/FloatingIcons'
+// import FloatingIcons from '../components/FloatingIcons'
 import AboutSection from '../components/AboutSection'
 import StatsCounter from '../components/StatsCounter'
 import TechStackSection from '../components/TechStackSection'
@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <ScrollProgress />
       <HeroSection />
-      <FloatingIcons />
+      {/* <FloatingIcons /> */}
 
       <AboutSection />
       <StatsCounter />

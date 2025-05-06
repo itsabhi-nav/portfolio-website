@@ -5,8 +5,8 @@
 
 /* ==== CSS Variables: Light Theme ==== */
 :root {
-  --font-sans: 'Inter', sans-serif;
-  --font-mono: 'Geist Mono', monospace;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Geist Mono", monospace;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -54,7 +54,6 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-
 }
 
 /* ==== Scrollbar Styling ==== */
@@ -79,9 +78,15 @@ body {
 
 /* ==== Animation: Floating Icons ==== */
 @keyframes float-slow {
-  0%   { transform: translateY(0px) rotate(0deg); }
-  50%  { transform: translateY(-20px) rotate(10deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
 }
 .animate-float-slow {
   animation: float-slow 6s ease-in-out infinite;
@@ -89,9 +94,15 @@ body {
 
 /* ==== Animation: Simple Float ==== */
 @keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 .animate-float {
   animation: float 3s ease-in-out infinite;
@@ -99,8 +110,14 @@ body {
 
 /* ==== Animation: Fade In ==== */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fadeIn {
   animation: fadeIn 0.8s ease forwards;
